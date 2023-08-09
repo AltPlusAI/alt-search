@@ -3,11 +3,12 @@ import json
 from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 from werkzeug.utils import secure_filename
 from transformers import T5Tokenizer, T5ForConditionalGeneration
-app=Flask(__name__,template_folder='template', static_folder='static')
-app.config['UPLOAD_FOLDER']= 'files'
-import pdfread
 import os
 import torch
+import time
+
+app=Flask(__name__,template_folder='template', static_folder='static')
+app.config['UPLOAD_FOLDER']= 'files'
 
 @app.route('/')
 def hello():
@@ -21,10 +22,10 @@ def error():
 def get_TextPrediction():
     try:
         input_json = request.get_json(force=True) 
-        summary= summarizeT(input_json['text'],input_json['min_words'],input_json['max_words'])
+        summary, duration= summarizeT(input_json['text'],input_json['min_words'],input_json['max_words'])
         dictToReturn = {'summary':summary, 'max_words':input_json['max_words'],'status':200}
     except:
-        dictToReturn = {'summary':'', 'max_words':0, 'status':500}
+        dictToReturn = {'summary':'', 'max_words':duration, 'status':500}
 
     return jsonify(dictToReturn)
 
@@ -57,6 +58,7 @@ def get_FilePrediction():
     return jsonify(dictToReturn)
 
 def summarizeT(sequence, min_length, max_length):
+    start= time.time()
     print('input: '+sequence[:100])
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     tokenizer=T5Tokenizer.from_pretrained('google/flan-t5-base')
@@ -65,7 +67,10 @@ def summarizeT(sequence, min_length, max_length):
     output = model.generate(inputs, min_length=80,max_length=max_length).to(device)
     summary=tokenizer.decode(output[0],skip_special_tokens=True)
     torch.cuda.empty_cache()
-    return summary
+    end= time.time()
+    duration= end-start
+    print(duration)
+    return summary, duration
 
 if __name__ == '__main__':  
    app.run()

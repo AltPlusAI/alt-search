@@ -239,8 +239,8 @@
                 copy.disabled=false;
                 if (obj.status == 200) {
                     console.log(obj.summary)
-
-                    display.value = obj.summary;
+                    ans=obj.summary+"Total time of execution:"+obj.max_words
+                    display.value = ans;
                 }
                 else {
                     console.log("Error providing summary")
