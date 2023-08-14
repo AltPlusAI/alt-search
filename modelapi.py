@@ -29,33 +29,7 @@ def get_TextPrediction():
 
     return jsonify(dictToReturn)
 
-@app.route('/upload', methods=['POST'])
-def get_FilePrediction():
-    f = request.files['file']
-    f.save(secure_filename(f.filename))
-    print('uploaded successfully')
-    name=(f.filename).replace(' ','_')
-    ext= os.path.splitext(name)[1]
-    print(ext)
-    if( ext == '.docx'):
-        text = pdfread.readDocx(name)
-    if( ext== '.text'):
-        text= pdfread.readText(name)
-    if (ext== '.pdf'):
-        text= pdfread.readPDF(name)
-    summary=''
-    try:
-        summary= summarizeT(text,100,500)
-        dictToReturn = {'summary':summary, 'max_words':'max_words', 'status':200}
-    except:
-        dictToReturn = {'summary':'', 'max_words':'max_words', 'status':500}
-    print(summary)
-    if os.path.exists(name):
-        os.remove(name)
-    else:
-        print("The file does not exist")
-    
-    return jsonify(dictToReturn)
+
 
 def summarizeT(sequence, min_length, max_length):
     start= time.time()
