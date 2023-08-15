@@ -1,13 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 
-#Defining function to get data from HTML doc
-def data(url):
-    r = requests.get('https://en.wikipedia.org/wiki/Independence_Day_(India)')
-    return r.text
-
-s = data("r")
-soup = BeautifulSoup(s, 'html.parser')
-input = ''
-for input in soup.find_all(['p', 'ul', 'li']):
-    print(input.get_text())
+#Function for getting the table of contents
+def content(url):
+    s = requests.get(url).text
+    soup = BeautifulSoup(s, 'html.parser')
+    scrapedInput = ''
+    for input in soup.find_all(['p']): #take input from p tags
+        print(input.get_text())
+        scrapedInput += input.get_text()
+    return scrapedInput
+url = input('Enter URL ') #take input from the user
+content(url) #call the function
