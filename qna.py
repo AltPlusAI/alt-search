@@ -19,9 +19,9 @@ def QNA(context, question, max_length):
     print(duration)
     return summary, duration
 
-i=0
-while i<=5:
-    context= input("enter context")
-    question= input("enter question")
-    print(QNA(context, question, 150))
-    i+=1
+# i=0
+# while i<=5:
+#     context= input("enter context")
+#     question= input("enter question")
+#     print(QNA(context, question, 150))
+#     i+=1
