@@ -19,11 +19,14 @@ def hello():
 def error():
     return render_template('404.html')
 
+# This gets url requested and summarise the single url and sends the summarised content 
 @app.route('/url', methods=['POST'])
 def get_UrlData():
     try: 
         input_json = request.get_json(force=True) 
         text=webscrap.data(input_json['text'])
+        # text2= webscrap.data(input_json['text2'])
+        # text+=text2
         summary = summarizeT(text,140)
         dictToReturn = {'summary':summary,'status':200}
         print(summary)
@@ -32,8 +35,9 @@ def get_UrlData():
     
     return jsonify(dictToReturn)
 
+# After getting url content asked questions will be answered and replied as json
 @app.route('/qnaResults', methods=['POST'])
-def get_SearchResults():
+def get_QnaResults():
     try: 
         input_json = request.get_json(force=True) 
         summary=qna.QNA(text,input_json['text'],10)
@@ -44,15 +48,24 @@ def get_SearchResults():
     
     return jsonify(dictToReturn)
 
+# this gets the search urls
 @app.route('/searchResults', methods=['POST'])
 def get_GoogleResults():
-    try: 
-        input_json = request.get_json(force=True) 
-        summary=google(input_json['text'])
-        dictToReturn = {'summary':str(summary),'status':200}
-        print(summary)
-    except:
-        dictToReturn = {'summary':'', 'status':500}
+     
+    input_json = request.get_json(force=True) 
+    print(input_json['text'])
+    link=google(input_json['text'])
+    print(link)
+    i=0
+    dictToReturn={}
+    for lin in range(len(link)):
+        dictToReturn['url'+str(i)]= link[lin]
+        # dictToReturn['title'+str(i)]= link[lin+1]           
+        i+=1
+
+    # dictToReturn = {'summary':str(summary),'status':200}
+    print(dictToReturn)
+
     
     return jsonify(dictToReturn)
 
@@ -86,14 +99,16 @@ def summarizeT(sequence, max_length):
     return summary, duration
 
 def google(query):
-    response= requests.get("https://www.googleapis.com/customsearch/v1?key=AIzaSyCpKsc33vEiu-K5QT9UjzTU6FqwPpxCM_c&cx=017576662512468239146:omuauf_lfve&q="+query)
+    response= requests.get("https://www.googleapis.com/customsearch/v1?key=AIzaSyCpKsc33vEiu-K5QT9UjzTU6FqwPpxCM_c&cx=d3ae9be4ac4324a35&q="+query)
     resp_json=json.loads(response.text)
-    link={}
+    link=[]
+    # title=[]
     i=0
     for items in resp_json["items"]:
-        link["'"+i+"'"]=items["link"]
+        link.append(str(items["link"]))
+        link.append(str(items["title"]))
+
         i+=1
-    print(link)
     return link
 
 
