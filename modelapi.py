@@ -40,7 +40,7 @@ def get_UrlData():
 def get_QnaResults():
     try: 
         input_json = request.get_json(force=True) 
-        summary=qna.QNA(text,input_json['text'],10)
+        summary,duration=qna.QNA(text,input_json['text'],60)
         dictToReturn = {'summary':summary,'status':200}
         print(summary)
     except:

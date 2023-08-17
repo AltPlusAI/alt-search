@@ -10,8 +10,8 @@ def QNA(context, question, max_length):
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     tokenizer=T5Tokenizer.from_pretrained('google/flan-t5-base')
     model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-base", device_map="auto").to(device)
-    inputs=tokenizer.encode("question:"+question+" context:" +context,return_tensors='pt', max_length=512, truncation=True).to(device)
-    output = model.generate(inputs, min_length=10,max_length=max_length).to(device)
+    inputs=tokenizer.encode("question:"+question+"\n context:" +context,return_tensors='pt', max_length=512, truncation=True).to(device)
+    output = model.generate(inputs, min_length=14,max_length=max_length).to(device)
     summary=tokenizer.decode(output[0],skip_special_tokens=True)
     torch.cuda.empty_cache()
     end= time.time()
