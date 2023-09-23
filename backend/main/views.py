@@ -20,7 +20,7 @@ text=''
 
 class GoogleResults(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
+	# authentication_classes = (SessionAuthentication,)
 	##
 	def post(self, request):
             input_json = request.data

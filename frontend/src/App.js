@@ -7,7 +7,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Main from './components/Main/Main'
-
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -25,12 +24,12 @@ function App() {
 
   useEffect(() => {
     client.get("/auth/user")
-    .then(function(res) {
-      setCurrentUser(true);
-    })
-    .catch(function(error) {
-      setCurrentUser(false);
-    });
+      .then(function (res) {
+        setCurrentUser(true);
+      })
+      .catch(function (error) {
+        setCurrentUser(false);
+      });
   }, []);
 
   function update_form_btn() {
@@ -52,14 +51,14 @@ function App() {
         username: username,
         password: password
       }
-    ).then(function(res) {
+    ).then(function (res) {
       client.post(
         "/auth/login",
         {
           email: email,
           password: password
         }
-      ).then(function(res) {
+      ).then(function (res) {
         setCurrentUser(true);
       });
     });
@@ -74,7 +73,7 @@ function App() {
         password: password,
         username: username
       },
-    ).then(function(res) {
+    ).then(function (res) {
       console.log(res.data)
       setCurrentUser(true);
     });
@@ -84,8 +83,8 @@ function App() {
     e.preventDefault();
     client.post(
       "/auth/logout",
-      {withCredentials: true}
-    ).then(function(res) {
+      { withCredentials: true }
+    ).then(function (res) {
       setCurrentUser(false);
     });
   }
@@ -108,74 +107,82 @@ function App() {
           </Container>
         </Navbar>
         <Main />
-          {/* <div className="center">
+        {/* <div className="center">
             <h2>You're logged in!</h2>
           </div> */}
-        </div>
+      </div>
     );
   }
   return (
     <div>
-    <Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand>AltSearch</Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            <Button id="form_btn" onClick={update_form_btn} variant="light">Register</Button>
-          </Navbar.Text>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    {
-      registrationToggle ? (
-        <div className="center">
-          <Form onSubmit={e => submitRegistration(e)}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </div>        
-      ) : (
-        <div className="center">
-          <Form onSubmit={e => submitLogin(e)}>
-            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand>AltSearch</Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+              <Button id="form_btn" onClick={update_form_btn} variant="light">Register</Button>
+            </Navbar.Text>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      {
+        registrationToggle ? (
+          <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <div class="col-10 col-md-8 col-lg-6">
+                <Form onSubmit={e => submitRegistration(e)}>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicUsername">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                  </Form.Group>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Form>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <div class="col-10 col-md-8 col-lg-6">
+                <Form onSubmit={e => submitLogin(e)}>
+                  {/* <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
             </Form.Group> */}
-            <Form.Group className="mb-3" controlId="formBasicUsername">
-              <Form.Label>User Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </div>
-      )
-    }
+                  <Form.Group className="mb-3" controlId="formBasicUsername">
+                    <Form.Label>User Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                  </Form.Group>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Form>
+              </div>
+            </div>
+          </div>
+        )
+      }
     </div>
   );
 }

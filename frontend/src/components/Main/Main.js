@@ -1,69 +1,18 @@
-import "./Main.css";
+import "../../App.css";
+import Query from '../Query/Query'
 const Main = () => {
   return (
     <div className="container">
       <div className="row clearfix">
         <div className="col-lg-6">
           <div className="card chat-app">
-            <div id="plist" className="people-list">
-              <div className="input-group style1">
-                <div className="input-group-prepend">
-                  <button id="searchbtn" type="submit"> <span
-                    className="input-group-text"><i className="fa fa-search"></i></span></button>
-                </div>
-                <input type="text" id="searchquery" className="form-control" placeholder="Search..."></input>
-              </div>
-              <ul className="list-unstyled chat-list mt-2 mb-0" id="searchlist">
-                <li className="clearfix" id="list0" onclick="selectLink(this.id,'0')">
-                  <div className="about">
-                    <div className="name" id="name0"></div>
-                    <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                  </div>
-                </li>
-                <li className="clearfix" id="list1" onclick="selectLink(this.id,'1')">
-                  <div className="about">
-                    <div className="name" id="name1"></div>
-                    <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                  </div>
-                </li>
-                <li className="clearfix" id="list2" onclick="selectLink(this.id,'2')">
-                  <div className="about">
-                    <div className="name" id="name2"></div>
-                    <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                  </div>
-                </li>
-                <li className="clearfix" id="list3" onclick="selectLink(this.id,'3')">
-                  <div className="about">
-                    <div className="name" id="name3"></div>
-                    <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                  </div>
-                </li>
-                <li className="clearfix" id="list4" onclick="selectLink(this.id,'4')">
-                  <div className="about">
-                    <div className="name" id="name4"></div>
-                    <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                  </div>
-                </li>
-                <li className="clearfix" id="list5" onclick="selectLink(this.id,'5')">
-                  <div className="about">
-                    <div className="name" id="name5"></div>
-                    <div className="status"> <i className="fa fa-circle online"></i> online
-                    </div>
-                  </div>
-                </li>
-                <li className="clearfix">
-                  <button id="selectbtn" type="submit" onclick="sendUrl(urllist)"> <span
-                    className="input-group-text"><i className="fa fa-list-alt"> Select and
-                      Summarize</i></span></button>
-                </li>
-              </ul>
-            </div>
+            <Query />
             <div className="chat">
               <div className="chat-header clearfix style2">
                 <div className="row">
                   <div className="col-lg-6">
                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                      
+
                     </a>
                     <div className="chat-about">
                       <h6 className="m-b-0">ALT Search </h6>
