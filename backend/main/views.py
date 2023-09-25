@@ -38,25 +38,6 @@ class GoogleResults(APIView):
             print(dictToReturn)
             return Response(dictToReturn, status=status.HTTP_200_OK)
 
-@api_view([ 'POST'])
-def get_GoogleResults(request):
-    if request.method== 'POST':
-        input_json = request.data
-        print(input_json['text'])
-        link=google(input_json['text'])
-        print(link)
-        i=0
-        dictToReturn={}
-        for lin in range(len(link)):
-            dictToReturn['url'+str(i)]= link[lin]
-            # dictToReturn['title'+str(i)]= link[lin+1]           
-            i+=1
-
-        # dictToReturn = {'summary':str(summary),'status':200}
-        print(dictToReturn)
-        return Response(dictToReturn)
-    return Response({"message": "there is an error"})
-
 class UrlSummary(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	authentication_classes = (SessionAuthentication,)
@@ -72,21 +53,6 @@ class UrlSummary(APIView):
             except:
                 dictToReturn = {'summary':'', 'status':500}
             return Response(dictToReturn)
-     
-@api_view([ 'POST'])
-def get_UrlData(request):
-    try: 
-        input_json = request.data
-        text=webscrap.data(input_json['text'])
-        # text2= webscrap.data(input_json['text2'])
-        # text+=text2
-        summary = summarizeT(text,140)
-        dictToReturn = {'summary':summary,'status':200}
-        print(summary)
-    except:
-        dictToReturn = {'summary':'', 'status':500}
-    
-    return Response(dictToReturn)
 
 class QnaResults(APIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -101,20 +67,6 @@ class QnaResults(APIView):
             dictToReturn = {'summary':'', 'status':500}
         return Response(dictToReturn)
 
-     
-            
-
-@api_view(['POST'])
-def get_QnaResults(request):
-    try: 
-        input_json = request.data
-        summary,duration=qna.QNA(text,input_json['text'],60)
-        dictToReturn = {'summary':summary,'status':200}
-        print(summary)
-    except:
-        dictToReturn = {'summary':'', 'status':500}
-    
-    return Response(dictToReturn)
 
 def summarizeT(sequence, max_length):
     # sequence= webscrap.data(url)
