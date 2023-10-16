@@ -130,7 +130,7 @@ function App() {
         registrationToggle ? (
           <div class="container h-100">
             <div class="row h-100 justify-content-center align-items-center">
-              <div class="col-10 col-md-8 col-lg-6">
+              <div class="col-10 col-md-8 col-lg-6 p-5">
                 <Form onSubmit={e => submitRegistration(e)}>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -157,7 +157,7 @@ function App() {
         ) : (
           <div class="container h-100">
             <div class="row h-100 justify-content-center align-items-center">
-              <div class="col-10 col-md-8 col-lg-6">
+              <div class="col-10 col-md-8 col-lg-6 p-5">
                 <Form onSubmit={e => submitLogin(e)}>
                   {/* <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>

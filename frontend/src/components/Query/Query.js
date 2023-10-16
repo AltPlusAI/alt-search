@@ -1,8 +1,11 @@
 import axios from 'axios';
+import React from 'react';
 import { useState, useEffect } from 'react';
 import "../../App.css";
+import logo from './ALT+AI_logo.png'
 import 'react-chat-elements/dist/main.css'
 import { MessageList } from "react-chat-elements"
+import { Popup, Button } from "react-chat-elements"
 import { MessageBox } from "react-chat-elements"
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -25,6 +28,55 @@ const Query = () => {
     const [links, setLinks] = useState([]);
     const [link, setLink] = useState('');
 
+
+    const [show, setShow] = React.useState(false);
+    // For popup
+    const popup = {
+        show: show,
+        header: "Clear Chat?",
+        headerButtons: [
+            {
+                type: "transparent",
+                color: "black",
+                text: "X",
+                onClick: () => {
+                    setShow(false);
+                },
+            },
+        ],
+        text: "Do you really want to delete chat",
+        footerButtons: [
+            {
+                color: "white",
+                backgroundColor: "#ff5e3e",
+                text: "Cancel",
+                onClick: () => {
+                    setShow(false);
+                },
+            },
+            {
+                color: "white",
+                backgroundColor: "lightgreen",
+                text: "OK",
+                onClick: () => {
+                    setShow(false);
+                    setMessages([
+                        // Initialize with some initial messages
+                        {
+                            position: "left",
+                            type: "text",
+                            title: "AltSearch",
+                            text: "How can i help you?",
+                        }
+                    ])
+                },
+            },
+        ]
+    }
+
+
+
+    const [style, setState] = useState('clearfix');
     // Chat messages
     const [messages, setMessages] = useState([
         // Initialize with some initial messages
@@ -32,23 +84,18 @@ const Query = () => {
             position: "left",
             type: "text",
             title: "AltSearch",
-            text: "Give me a message list example !",
-        },
-        {
-            position: "right",
-            type: "text",
-            title: "You",
-            text: "That's all.",
+            text: "How can i help you?",
         },
     ]);
 
     // Add a function to add new messages
     const addMessage = (newMessage) => {
         setMessages([...messages, newMessage]);
+
     };
 
     const handleSendMessage = (msg, title, pos) => {
-        const newMessage = {
+        var newMessage = {
             text: msg,
             title: title,
             type: 'text',
@@ -91,9 +138,8 @@ const Query = () => {
 
     function getQnaResults(e) {
         e.preventDefault();
-        setText(`${qna}`)
-        handleSendMessage(text, 'You','right')
-        setQna('') //empty qna
+        // setTextQna(`${qna}`)
+        handleSendMessage(qna, 'Alt Search', 'right')
         console.log(messages)
         const headers = {
             'Accept': 'application/json',
@@ -103,19 +149,20 @@ const Query = () => {
         client.post(
             "/qnaResults",
             {
-                text: String(text),
+                text: String(qna),
                 max_words: 100
             },
             {
                 headers: headers
             }
         ).then(function (res) {
-            
-            handleSendMessage(res.data['summary'], 'Alt Search','left')
+
+            handleSendMessage(res.data['summary'], 'Alt Search', 'left')
+            setQna('') //empty qna
         });
     }
 
-    function getResults(e) {    
+    function getResults(e) {
         e.preventDefault();
         setText(`${search}`)
         console.log(csrf)
@@ -243,7 +290,7 @@ const Query = () => {
                     <div className="row">
                         <div className="col-lg-6">
                             <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-
+                            <img src={logo} alt="avatar"></img>
                             </a>
                             <div className="chat-about">
                                 <h6 className="m-b-0">ALT Search </h6>
@@ -251,14 +298,11 @@ const Query = () => {
                             </div>
                         </div>
                         <div className="col-lg-6 hidden-sm text-right">
-                            <a href="javascript:void(0);" className="btn btn-outline-secondary"><i
-                                className="fa fa-camera"></i></a>
-                            <a href="javascript:void(0);" className="btn btn-outline-primary"><i
-                                className="fa fa-image"></i></a>
-                            <a href="javascript:void(0);" className="btn btn-outline-info"><i
-                                className="fa fa-cogs"></i></a>
-                            <a href="javascript:void(0);" className="btn btn-outline-warning"><i
-                                className="fa fa-question"></i></a>
+                            <button onClick={() => setShow(true)} className="btn btn-outline-info" title='Clear Chat'><i
+                                className="fa fa-cogs" ></i></button>
+                            <Popup
+                                popup={popup}
+                            />
                         </div>
                     </div>
                 </div>
