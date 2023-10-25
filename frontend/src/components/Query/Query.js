@@ -164,7 +164,7 @@ const Query = () => {
 
     function getResults(e) {
         e.preventDefault();
-        setText(`${search}`)
+        // setText(`${search}`)
         console.log(csrf)
         const headers = {
             'Accept': 'application/json',
@@ -174,7 +174,7 @@ const Query = () => {
         client.post(
             "/searchResults",
             {
-                text: String(text),
+                text: String(search),
                 max_words: 100
             },
             {

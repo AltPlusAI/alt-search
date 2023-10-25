@@ -9,9 +9,9 @@ from rest_framework.response import Response
 import webscrap, qna
 
 import time
-import torch
-from transformers import PegasusForConditionalGeneration, PegasusTokenizer
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+# import torch
+# from transformers import PegasusForConditionalGeneration, PegasusTokenizer
+# from transformers import T5Tokenizer, T5ForConditionalGeneration
 # Create your views here.
 def index(request):
     return render(request, 'chat_app.html')
@@ -72,13 +72,15 @@ def summarizeT(sequence, max_length):
     # sequence= webscrap.data(url)
     start= time.time()
     print('input: '+sequence[:100])
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    tokenizer=T5Tokenizer.from_pretrained('google/flan-t5-base')
-    model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-base", device_map="auto").to(device)
-    inputs=tokenizer.encode("Produce an article summary of the following news article:" +sequence,return_tensors='pt', max_length=512, truncation=True).to(device)
-    output = model.generate(inputs, min_length=80,max_length=max_length).to(device)
-    summary=tokenizer.decode(output[0],skip_special_tokens=True)
-    torch.cuda.empty_cache()
+    # device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    # tokenizer=T5Tokenizer.from_pretrained('google/flan-t5-base')
+    # model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-base", device_map="auto").to(device)
+    # inputs=tokenizer.encode("Produce an article summary of the following news article:" +sequence,return_tensors='pt', max_length=512, truncation=True).to(device)
+    # output = model.generate(inputs, min_length=80,max_length=max_length).to(device)
+    # summary=tokenizer.decode(output[0],skip_special_tokens=True)
+    # torch.cuda.empty_cache()
+
+    summary="tested"
     end= time.time()
     duration= end-start
     print(duration)

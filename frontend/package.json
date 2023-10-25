@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.3",
     "bootstrap": "^5.2.3",
+    "file-loader": "^6.2.0",
     "gh-pages": "^6.0.0",
     "http-server": "^14.1.1",
     "js-cookie": "^3.0.1",
@@ -17,14 +18,15 @@
     "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "url-loader": "^4.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "serve": "webpack serve --mode development",
+    "start":"react-scripts start",
     "build": "webpack --mode production",
-    "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "serve": "webpack serve --mode development",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
