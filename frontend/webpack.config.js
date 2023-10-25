@@ -27,6 +27,11 @@ module.exports = function (_env, argv) {
                 //     use: ["babel-loader"] 
                 // },
                 {
+                    test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+                    exclude: /node_modules/,
+                    use: ['file-loader?name=[name].[ext]'] // ?name=[name].[ext] is only necessary to preserve the original file name
+                },
+                {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     use: {
@@ -44,6 +49,12 @@ module.exports = function (_env, argv) {
                         isProduction ? MiniCssExtractPlugin.loader : "style-loader",
                         "css-loader"
                     ]
+                },
+                {
+                    test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                    use: {
+                        loader: 'url-loader?limit=100000'
+                    }
                 }
             ]
         },
