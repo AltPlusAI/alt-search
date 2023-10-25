@@ -25,18 +25,23 @@ SECRET_KEY = 'django-insecure--e1hgrmknbmi^&m=vu!@&tzbm4k4o%w33o773ajaabraw#*x*j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',"https://altplusai.github.io","altplusai.pythonanywhere.com"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',"altplusai.github.io","altplusai.pythonanywhere.com"]
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://0.0.0.0',
-    'altplusai.pythonanywhere.com'
+    'https://altplusai.pythonanywhere.com',
     "http://192.168.0.152:3000",
     "https://altplusai.github.io"
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_COOKIE_HTTPONLY = False        
+CSRF_COOKIE_SECURE = False
+
+CSRF_COOKIE_DOMAIN= ['altplusai.github.io']
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000',"altplusai.github.io","https://altplusai.github.io/alt-search/","http://localhost:3000",'altplusai.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000',"https://altplusai.github.io","https://altplusai.github.io/alt-search/","http://localhost:3000",'https://altplusai.pythonanywhere.com']
 csrf_cookie_name = "xsrf-token"
 # Application definition
 
