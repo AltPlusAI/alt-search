@@ -25,16 +25,17 @@ SECRET_KEY = 'django-insecure--e1hgrmknbmi^&m=vu!@&tzbm4k4o%w33o773ajaabraw#*x*j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',"https://altplusai.github.io"]
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://0.0.0.0',
-    "http://192.168.0.152:3000"
+    "http://192.168.0.152:3000",
+    "https://altplusai.github.io"
 ]
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000']
+CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000',"https://altplusai.github.io","https://altplusai.github.io/alt-search/","http://localhost:3000"]
 csrf_cookie_name = "xsrf-token"
 # Application definition
 
