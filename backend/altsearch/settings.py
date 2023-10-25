@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--e1hgrmknbmi^&m=vu!@&tzbm4k4o%w33o773ajaabraw#*x*j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',"https://altplusai.github.io"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',"https://altplusai.github.io","https://altplusai.pythonanywhere.com"]
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
