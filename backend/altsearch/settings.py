@@ -86,7 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'altsearch.wsgi.application'
+WSGI_APPLICATION = 'altsearch.wsgi.app'
 
 
 # Database

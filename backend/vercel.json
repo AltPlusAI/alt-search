@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "altsearch/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "altsearch/wsgi.py"
+      }
+    ]
+}
