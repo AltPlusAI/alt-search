@@ -11,6 +11,7 @@ import json
 
 #     return inputT
 
+
 #Function for getting the table of contents
 def data(url):
     s = requests.get(url).text
