@@ -36,6 +36,20 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000']
 csrf_cookie_name = "xsrf-token"
+
+# Session cookies are being sent but not stored by the browser because of samesite property and cookies not being secured
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
+CSRF_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SAMESITE = "None"
+
+# CSRF_COOKIE_DOMAIN = "https://altplusai.github.io/"
+# SESSION_COOKIE_DOMAIN = "https://altplusai.github.io/"
+# CSRF_TRUSTED_ORIGINS = "http://192.168.0.152:3000"
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
