@@ -12,7 +12,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const client = axios.create({
-  baseURL: "https://altplusai.pythonanywhere.com"
+  baseURL: "https://alt-search.vercel.app/"
 });
 
 function App() {
