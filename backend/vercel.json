@@ -1,20 +1,14 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "altsearch/wsgi.py",
-        "use": "@vercel/python",
-        "config": {"maxLambdaSize": "15mb", "runtime": "python3.10"}
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "altsearch/wsgi.py"
-      },
-      {
-        "src": "/static/(.*)",
-        "dest": "/static/$1"
-      }
-    ]
-  }
+  "builds": [
+    {
+      "src": "vercel_app/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "vercel_app/wsgi.py"
+    }
+  ]
+}
