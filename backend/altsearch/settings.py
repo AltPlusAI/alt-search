@@ -39,8 +39,8 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_COOKIE_HTTPONLY = False        
 CSRF_COOKIE_SECURE = False
 
-# CSRF_COOKIE_DOMAIN= 'https://alt-search.vercel.app/'
-# SESSION_COOKIE_DOMAIN="https://alt-search.vercel.app/"
+CSRF_COOKIE_DOMAIN= 'https://alt-search-static.vercel.app/'
+SESSION_COOKIE_DOMAIN="https://alt-search-static.vercel.app/"
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000',"https://alt-search-static.vercel.app/","https://altplusai.github.io/alt-search/","https://alt-search.vercel.app/"]
 csrf_cookie_name = "xsrf-token"
