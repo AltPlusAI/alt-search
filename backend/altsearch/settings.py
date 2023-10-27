@@ -30,9 +30,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://0.0.0.0',
-    'https://altplusai.pythonanywhere.com',
+    "https://alt-search.vercel.app/",
     "http://192.168.0.152:3000",
-    "https://altplusai.github.io"
+    "https://alt-search-static.vercel.app/"
 ]
 # CORS_ALLOW_ALL_ORIGINS = True
 
@@ -42,7 +42,7 @@ CSRF_COOKIE_SECURE = False
 # CSRF_COOKIE_DOMAIN= 'https://alt-search.vercel.app/'
 # SESSION_COOKIE_DOMAIN="https://alt-search.vercel.app/"
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000',"https://altplusai.github.io","https://altplusai.github.io/alt-search/","http://localhost:3000",'https://altplusai.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000',"https://alt-search-static.vercel.app/","https://altplusai.github.io/alt-search/","https://alt-search.vercel.app/"]
 csrf_cookie_name = "xsrf-token"
 
 # Session cookies are being sent but not stored by the browser because of samesite property and cookies not being secured
