@@ -39,7 +39,8 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_COOKIE_HTTPONLY = False        
 CSRF_COOKIE_SECURE = False
 
-CSRF_COOKIE_DOMAIN= ['altplusai.github.io']
+# CSRF_COOKIE_DOMAIN= 'https://alt-search.vercel.app/'
+# SESSION_COOKIE_DOMAIN="https://alt-search.vercel.app/"
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1:3000',"https://altplusai.github.io","https://altplusai.github.io/alt-search/","http://localhost:3000",'https://altplusai.pythonanywhere.com']
 csrf_cookie_name = "xsrf-token"
@@ -50,6 +51,7 @@ CSRF_COOKIE_SECURE = True
 CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
 CSRF_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_HTTPONLY = False
 
 
 # Application definition
@@ -103,8 +105,12 @@ WSGI_APPLICATION = 'altsearch.wsgi.app'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '2023*sept27',
+        'HOST': 'db.victfbcivedytmrgbjei.supabase.co',
+        'PORT': '5432',
     }
 }
 

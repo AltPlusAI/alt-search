@@ -105,7 +105,7 @@ const Query = () => {
         addMessage(newMessage);
     };
     const client = axios.create({
-        baseURL: "https://altplusai.pythonanywhere.com"
+        baseURL: "https://alt-search.vercel.app/"
     });
     // Adds links to a variable and sets the value of links
     function selectLink() {
