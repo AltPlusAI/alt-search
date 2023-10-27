@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os 
 from pathlib import Path
-
+import firebase_admin
+from firebase_admin import auth
+from firebase_admin import credentials
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,9 +32,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://0.0.0.0',
-    "https://alt-search.vercel.app/",
+    "https://alt-search.vercel.app",
     "http://192.168.0.152:3000",
-    "https://alt-search-static.vercel.app/"
+    "https://alt-search-static.vercel.app"
 ]
 # CORS_ALLOW_ALL_ORIGINS = True
 
@@ -116,12 +118,17 @@ DATABASES = {
 
 # AUTH_USER_MODEL = 'authentication.AppUser'
 
+
+cred = credentials.Certificate(os.path.join(BASE_DIR, "./altsearch/firebase-credentials.json"))
+firebase_admin.initialize_app(cred)
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
+        'authentication.authentication.FirebaseAuthentication',
     ),
 }
 
